@@ -4,7 +4,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
 
     // Dados fictícios para o login (em um sistema real, você consultaria um banco de dados)
     const validUsername = 'admin';
-    const validPassword = '12345';
+    const validPassword = '123';
 
     // Capturando o que o usuário digitou
     const username = document.getElementById('username').value;
@@ -12,7 +12,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
 
     // Exibe uma mensagem de sucesso
     const loginMsg = document.getElementById('login-msg');
-    loginMsg.textContent
+    loginMsg.textContent = '';
 
     // Limpa a mensagem de erro antes de uma nova tentativa de login
     const errorMsg = document.getElementById('error-msg');
