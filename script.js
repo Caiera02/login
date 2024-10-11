@@ -24,7 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
         // alert('Login bem-sucedido!');
         loginMsg.textContent = 'Login bem-sucedido!';
         // Aqui você poderia redirecionar o usuário
-        // window.location.href = "index2.html";
+        window.location.href = "index2.html";
     } else {
         // Exibe uma mensagem de erro
         errorMsg.textContent = 'Nome de usuário ou senha incorretos!';
