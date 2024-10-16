@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="login-container">
-        
+
         <h2>Login</h2>
 
-        <form id="loginForm">
-            <div class="input-field">
-                <label for="username">Matricula:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-field">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div id="message" class="error"></div>
+        <!-- <form id="loginForm"> -->
+            <form onsubmit="autenticarUsuario(event) ">
+                <div class="input-field">
+                    <label for="username">Matricula:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-field">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div id="erro-msg" class="error"></div>
 
-            <button type="submit">Entrar</button>
-        </form>
+                <button type="submit">Entrar</button>
+            </form>
 
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>

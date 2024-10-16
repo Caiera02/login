@@ -1,35 +1,39 @@
 from flask import Flask, request, jsonify
 import sqlite3
+from flask_cors import CORS
 
 app = Flask(__name__)
 
-# Função para verificar as credenciais no banco de dados
-def validate_login(username, password):
-    # Conectar ao banco de dados SQLite
+# Função para conectar ao banco de dados SQLite
+def conectar_banco():
     conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
+    conn.row_factory = sqlite3.Row  # Para retornar dicionários em vez de tuplas
+    return conn
 
-    # Verificar se o usuário e senha correspondem
-    cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
-    result = cursor.fetchone()
-    conn.close()
-
-    if result:
-        return True
-    else:
-        return False
-
-# Rota de login
+# Rota para autenticar o login
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()  # Capturar dados enviados pelo front-end
-    username = data.get('username')
-    password = data.get('password')
+    # Receber os dados do login (enviado via JSON)
+    dados = request.json
+    email = dados.get('username')
+    senha = dados.get('password')
+    
+    if not email or not senha:
+        return jsonify({'mensagem': 'Email e senha são obrigatórios!', 'status': 'falha'}), 400
 
-    if validate_login(username, password):
-        return jsonify({"success": True, "message": "Login bem-sucedido!"})
+    # Conectar ao banco de dados e verificar as credenciais
+    conn = conectar_banco()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+    usuario = cursor.fetchone()
+    conn.close()
+
+    # Verificar se o usuário foi encontrado
+    if usuario:
+        return jsonify({'mensagem': 'Login bem-sucedido!', 'status': 'sucesso'})
     else:
-        return jsonify({"success": False, "message": "Credenciais incorretas!"})
+        return jsonify({'mensagem': 'Email ou senha incorretos!', 'status': 'falha'}), 401
 
+# Iniciar o servidor
 if __name__ == '__main__':
     app.run(debug=True)
