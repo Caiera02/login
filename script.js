@@ -13,6 +13,13 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const errorMsg = document.getElementById('error-msg');
     errorMsg.textContent = '';
 
+    //Percorre a lista e verifica se o nome está na lista 
+
+    // for ( let i= 0; i < validUsername.length; i++)
+    //     {
+            
+    // }
+
     // Verifica se o nome de usuário e a senha estão corretos
     if (username == validUsername && password == validPassword) {
         // Exibe uma mensagem de sucesso ou redireciona para outra página
