@@ -1,27 +1,26 @@
-async function autenticarUsuario(event) {
-    event.preventDefault(); // Prevenir o envio padrão do formulário
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-    const username= "admin"
-    const password= "123"
+    //Dados fictícios para o login (em um sistema real, você consultaria um banco de dados)
+    const validUsername = 'admin';
+    const validPassword = '123';
 
-    // Capturar os valores do email e senha
+    //Capturando o que o usuário digitou
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Mensagem de alerta
-    if (!email || !senha) {
-        alert("Preencha todos os campos burro.");
-        return;
-    }
+    // Limpa a mensagem de erro antes de uma nova tentativa de login
+    const errorMsg = document.getElementById('error-msg');
+    errorMsg.textContent = '';
 
     // Verifica se o nome de usuário e a senha estão corretos
-    //     if (username === validUsername && password === validPassword) {
-    //         // Exibe uma mensagem de sucesso ou redireciona para outra página
-    //         alert('Login bem-sucedido!');
-    //         // loginMsg.textContent = 'Login bem-sucedido!';
-    //         // alert(' Seja Bem vindo a mais uma assembleia');
-
-    //         // Aqui você poderia redirecionar o usuário
-    //         window.location.href = "live.html";
-
-}
+    if (username == validUsername && password == validPassword) {
+        // Exibe uma mensagem de sucesso ou redireciona para outra página
+        alert('Login bem-sucedido!');
+        // Aqui você poderia redirecionar o usuário
+        window.location.href = "live.html";
+    } else {
+        // Exibe uma mensagem de erro
+        errorMsg.textContent = 'Usuario ou senha incorreta';
+    }
+});
