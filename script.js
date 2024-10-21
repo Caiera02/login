@@ -1,33 +1,43 @@
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
+ // Lista de logins (normalmente isso viria de um banco de dados)
+ const logins = [
+    { username: "usuario1", password: "senha1" },
+    { username: "usuario2", password: "senha2" },
+    { username: "usuario3", password: "senha3" }
+];
 
-    //Dados fictícios para o login (em um sistema real, você consultaria um banco de dados)
-    const validUsername = 'admin';
-    const validPassword = '123';
+// Função para validar login
+function validarLogin(usernameInput, passwordInput) {
+    // Percorre a lista de logins
+    for (let i = 0; i < logins.length; i++) {
+        const login = logins[i];
 
-    //Capturando o que o usuário digitou
+        // Verifica se o nome de usuário e a senha estão corretas
+        if (login.username === usernameInput && login.password === passwordInput) {
+            return true; // Login válido
+        }
+    }
+    return false; // Login inválido
+}
+
+// Captura o formulário e adiciona um listener para o evento 'submit'
+const form = document.getElementById('loginForm');
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita o envio padrão do formulário
+
+  
+    // Captura os valores dos inputs
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-
-    // Limpa a mensagem de erro antes de uma nova tentativa de login
     const errorMsg = document.getElementById('error-msg');
     errorMsg.textContent = '';
 
-    //Percorre a lista e verifica se o nome está na lista 
-
-    // for ( let i= 0; i < validUsername.length; i++)
-    //     {
-            
-    // }
-
-    // Verifica se o nome de usuário e a senha estão corretos
-    if (username == validUsername && password == validPassword) {
-        // Exibe uma mensagem de sucesso ou redireciona para outra página
-        alert('Login bem-sucedido!');
-        // Aqui você poderia redirecionar o usuário
+    // Verifica o login
+    if (validarLogin(username, password)) {
+        errorMsg.textContent = "Login bem-sucedido!";
+        errorMsg.style.color = "green";
         window.location.href = "live.html";
     } else {
-        // Exibe uma mensagem de erro
-        errorMsg.textContent = 'Usuario ou senha incorreta';
+       errorMsg.textContent = "Nome de usuário ou senha incorretos.";
+        mensagem.style.color = "red";
     }
 });
